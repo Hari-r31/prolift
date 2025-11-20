@@ -12,7 +12,7 @@ const CoachingPhilosophy = () => {
       transition: { 
         duration: 0.8,
         staggerChildren: 0.2,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   };
@@ -22,7 +22,7 @@ const CoachingPhilosophy = () => {
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: "easeOut" as const }
     }
   };
 
@@ -99,7 +99,7 @@ const CoachingPhilosophy = () => {
                   <motion.div
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.6 }}
-                    className={`w-16 h-16 bg-gradient-to-br ${philosophy.color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}
+                    className={`w-16 h-16 bg-linear-to-br ${philosophy.color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}
                   >
                     <philosophy.icon className="h-8 w-8 text-white" />
                   </motion.div>
@@ -113,7 +113,7 @@ const CoachingPhilosophy = () => {
                   </p>
 
                   {/* Decorative Line */}
-                  <div className="mt-6 h-1 w-0 bg-gradient-to-r from-green-500 to-orange-500 group-hover:w-full transition-all duration-300 mx-auto"></div>
+                  <div className="mt-6 h-1 w-0 bg-linear-to-r from-green-500 to-orange-500 group-hover:w-full transition-all duration-300 mx-auto"></div>
                 </CardContent>
               </Card>
             </motion.div>

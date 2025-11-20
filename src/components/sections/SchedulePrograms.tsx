@@ -17,7 +17,7 @@ const SchedulePrograms = () => {
       transition: { 
         duration: 0.8,
         staggerChildren: 0.2,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   };
@@ -28,12 +28,12 @@ const SchedulePrograms = () => {
       opacity: 1, 
       y: 0,
       scale: 1,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: "easeOut" as const }
     },
     hover: { 
       y: -10,
       scale: 1.02,
-      transition: { duration: 0.3, ease: "easeOut" }
+      transition: { duration: 0.3, ease: "easeOut" as const }
     }
   };
 
@@ -132,7 +132,7 @@ const SchedulePrograms = () => {
                     <motion.div
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.6 }}
-                      className={`w-16 h-16 bg-gradient-to-br ${program.color} rounded-2xl flex items-center justify-center`}
+                      className={`w-16 h-16 bg-linear-to-br ${program.color} rounded-2xl flex items-center justify-center`}
                     >
                       <program.icon className="h-8 w-8 text-white" />
                     </motion.div>
@@ -196,7 +196,7 @@ const SchedulePrograms = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-2xl p-8 border border-cyan-200"
+          className="bg-linear-to-r from-cyan-50 to-blue-50 rounded-2xl p-8 border border-cyan-200"
         >
           <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
             Academy Locations

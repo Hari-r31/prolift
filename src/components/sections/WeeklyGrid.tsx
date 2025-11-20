@@ -17,7 +17,7 @@ const WeeklyGrid = () => {
       transition: { 
         duration: 0.8,
         staggerChildren: 0.1,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   };
@@ -27,7 +27,7 @@ const WeeklyGrid = () => {
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: "easeOut" as const }
     }
   };
 
@@ -153,7 +153,7 @@ const WeeklyGrid = () => {
               onClick={() => setSelectedDay(selectedDay === day ? null : day)}
               className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
                 selectedDay === day
-                  ? 'bg-gradient-to-r from-green-600 to-orange-500 text-white'
+                  ? 'bg-linear-to-r from-green-600 to-orange-500 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -183,7 +183,7 @@ const WeeklyGrid = () => {
                 <CardContent className="p-6">
                   {/* Day Header */}
                   <div className="text-center mb-4">
-                    <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-green-500 to-orange-500 rounded-full text-white font-bold text-lg mb-2">
+                    <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-br from-green-500 to-orange-500 rounded-full text-white font-bold text-lg mb-2">
                       {daySchedule.day[0]}
                     </div>
                     <h3 className="text-xl font-bold text-gray-900">{daySchedule.day}</h3>

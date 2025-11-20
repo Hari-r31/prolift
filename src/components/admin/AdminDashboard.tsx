@@ -33,7 +33,7 @@ const AdminDashboard = () => {
       transition: { 
         duration: 0.8,
         staggerChildren: 0.1,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   };
@@ -44,12 +44,12 @@ const AdminDashboard = () => {
       opacity: 1, 
       y: 0,
       scale: 1,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: "easeOut" as const }
     },
     hover: { 
       y: -5,
       scale: 1.02,
-      transition: { duration: 0.3, ease: "easeOut" }
+      transition: { duration: 0.3, ease: "easeOut" as const}
     }
   };
 
@@ -200,7 +200,7 @@ const AdminDashboard = () => {
                 <Card className="border-0 shadow-xl bg-gray-800 hover:shadow-2xl transition-all duration-300">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-4">
-                      <div className={`w-12 h-12 bg-gradient-to-br ${card.color} rounded-xl flex items-center justify-center`}>
+                      <div className={`w-12 h-12 bg-linear-to-br ${card.color} rounded-xl flex items-center justify-center`}>
                         <card.icon className="h-6 w-6 text-white" />
                       </div>
                       <Badge 

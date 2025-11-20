@@ -21,7 +21,7 @@ const ScheduleHeader = () => {
       transition: { 
         duration: 0.8,
         staggerChildren: 0.2,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   };
@@ -31,7 +31,7 @@ const ScheduleHeader = () => {
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: "easeOut" as const }
     }
   };
 
@@ -42,7 +42,7 @@ const ScheduleHeader = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
-      className="py-20 bg-gradient-to-br from-green-600 to-orange-500 text-white"
+      className="py-20 bg-linear-to-br from-green-600 to-orange-500 text-white"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.h2 

@@ -10,7 +10,7 @@ const ScheduleCTA = () => {
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
+      transition: { duration: 0.8, ease: "easeOut" as const }
     }
   };
 
@@ -20,7 +20,7 @@ const ScheduleCTA = () => {
       transition: {
         duration: 3,
         repeat: Infinity,
-        ease: "easeInOut"
+        ease: "easeInOut" as const
       }
     }
   };
@@ -31,7 +31,7 @@ const ScheduleCTA = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
-      className="py-20 bg-gradient-to-br from-green-600 to-orange-500 relative overflow-hidden"
+      className="py-20 bg-linear-to-br from-green-600 to-orange-500 relative overflow-hidden"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">

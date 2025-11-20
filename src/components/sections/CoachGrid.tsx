@@ -14,7 +14,7 @@ const CoachGrid = () => {
       transition: { 
         duration: 0.8,
         staggerChildren: 0.15,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   };
@@ -25,12 +25,12 @@ const CoachGrid = () => {
       opacity: 1, 
       y: 0,
       scale: 1,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: "easeOut" as const }
     },
     hover: { 
       y: -10,
       scale: 1.02,
-      transition: { duration: 0.3, ease: "easeOut" }
+      transition: { duration: 0.3, ease: "easeOut" as const }
     }
   };
 
@@ -123,7 +123,7 @@ const CoachGrid = () => {
               <Card className="h-full border-0 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
                 <CardContent className="p-0">
                   {/* Coach Image */}
-                  <div className="relative h-64 bg-gradient-to-br from-gray-200 to-gray-300">
+                  <div className="relative h-64 bg-linear-to-br from-gray-200 to-gray-300">
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center">
                         <div className="w-20 h-20 bg-gray-400 rounded-full mx-auto mb-2"></div>

@@ -13,7 +13,7 @@ const ScheduleTimeline = () => {
       transition: { 
         duration: 0.8,
         staggerChildren: 0.2,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   };
@@ -23,7 +23,7 @@ const ScheduleTimeline = () => {
     visible: { 
       opacity: 1, 
       x: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: "easeOut" as const }
     }
   };
 
@@ -139,7 +139,7 @@ const ScheduleTimeline = () => {
           className="relative"
         >
           {/* Timeline Line */}
-          <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-green-500 to-orange-500"></div>
+          <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-linear-to-b from-green-500 to-orange-500"></div>
 
           <div className="space-y-12">
             {sessions.map((session, index) => (
@@ -151,8 +151,8 @@ const ScheduleTimeline = () => {
                 }`}
               >
                 {/* Time Badge */}
-                <div className="flex-shrink-0">
-                  <div className={`bg-gradient-to-r ${session.color} text-white px-6 py-3 rounded-full font-bold text-lg shadow-lg`}>
+                <div className="shrink-0">
+                  <div className={`bg-linear-to-r ${session.color} text-white px-6 py-3 rounded-full font-bold text-lg shadow-lg`}>
                     {session.time}
                   </div>
                 </div>
@@ -174,7 +174,7 @@ const ScheduleTimeline = () => {
                         <motion.div
                           whileHover={{ rotate: 360 }}
                           transition={{ duration: 0.6 }}
-                          className={`w-12 h-12 bg-gradient-to-br ${session.color} rounded-xl flex items-center justify-center flex-shrink-0`}
+                          className={`w-12 h-12 bg-linear-to-br ${session.color} rounded-xl flex items-center justify-center shrink-0`}
                         >
                           <session.icon className="h-6 w-6 text-white" />
                         </motion.div>
@@ -201,7 +201,7 @@ const ScheduleTimeline = () => {
                         </div>
                       </div>
 
-                      <button className="w-full bg-gradient-to-r from-green-600 to-orange-500 text-white py-2 rounded-lg font-semibold hover:shadow-lg transition-all duration-300">
+                      <button className="w-full bg-linear-to-r from-green-600 to-orange-500 text-white py-2 rounded-lg font-semibold hover:shadow-lg transition-all duration-300">
                         Book This Session
                       </button>
                     </CardContent>

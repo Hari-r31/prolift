@@ -21,7 +21,7 @@ const AdminLogin = () => {
     visible: { 
       opacity: 1, 
       scale: 1,
-      transition: { duration: 0.8, ease: "easeOut" }
+      transition: { duration: 0.8, ease: "easeOut" as const }
     }
   };
 
@@ -30,7 +30,7 @@ const AdminLogin = () => {
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: "easeOut" as const }
     }
   };
 
@@ -51,7 +51,7 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-linear-to-br from-gray-900 via-purple-900 to-gray-900 flex items-center justify-center p-4">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(20)].map((_, i) => (
@@ -86,7 +86,7 @@ const AdminLogin = () => {
           <CardHeader className="text-center pb-6">
             <motion.div
               variants={itemVariants}
-              className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4"
+              className="w-16 h-16 bg-linear-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4"
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.6 }}
             >
@@ -163,7 +163,7 @@ const AdminLogin = () => {
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 text-lg font-semibold hover:shadow-lg transition-all duration-300 disabled:opacity-50"
+                  className="w-full bg-linear-to-r from-purple-500 to-pink-500 text-white py-3 text-lg font-semibold hover:shadow-lg transition-all duration-300 disabled:opacity-50"
                 >
                   {isLoading ? (
                     <div className="flex items-center justify-center">

@@ -15,7 +15,7 @@ const Testimonials = () => {
       transition: { 
         duration: 0.8,
         staggerChildren: 0.2,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   };
@@ -25,7 +25,7 @@ const Testimonials = () => {
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: "easeOut" as const }
     }
   };
 
@@ -88,7 +88,7 @@ const Testimonials = () => {
   }, [currentIndex]);
 
   return (
-    <section className="py-20 bg-gradient-to-br from-green-50 to-orange-50">
+    <section className="py-20 bg-linear-to-br from-green-50 to-orange-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -129,7 +129,7 @@ const Testimonials = () => {
               {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  className="w-full flex-shrink-0 px-4"
+                  className="w-full shrink-0 px-4"
                 >
                   <Card className="p-8 border-0 shadow-xl bg-white">
                     <CardContent className="p-0">
