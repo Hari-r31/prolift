@@ -5,18 +5,20 @@ import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { Menu, X, ChevronDown, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import Link from "next/link";
+import Image from "next/image";
 
 const Header = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const heroRef = useRef<HTMLElement | null>(null);
 
-  // ✅ Intersection Observer for hero section visibility
   useEffect(() => {
-    const hero = document.getElementById('home') || 
-    document.getElementById('page-hero') ||
-        document.getElementById('contact-hero'); // ✅ fallback for inner pages; // ✅ fallback for inner pages
-    
+    const hero =
+      document.getElementById('home') ||
+      document.getElementById('page-hero') ||
+      document.getElementById('contact-hero');
+
     if (!hero) return;
 
     heroRef.current = hero;
@@ -26,7 +28,7 @@ const Header = () => {
         const [entry] = entries;
         setIsHeroVisible(entry.isIntersecting);
       },
-      { threshold: 0.1 } // Trigger when 20% of hero is visible
+      { threshold: 0.1 }
     );
 
     observer.observe(hero);
@@ -35,9 +37,9 @@ const Header = () => {
 
   const navItems = [
     { name: 'Home', href: '/' },
-    // { name: 'Schedule', href: '/schedule' },
-    // { name: 'Coaches', href: '/coaches' },
-    // { name: 'Contact', href: '/contact' },
+    { name: 'Schedule', href: '/schedule' },
+    { name: 'Coaches', href: '/coaches' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   const headerVariants: Variants = {
@@ -70,17 +72,20 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* 🔹 Logo (Switches instantly between white/black) */}
-          <a
+
+          {/* 🔹 Logo — FIXED to use Link + Image */}
+          <Link
             href="/"
             className="flex items-center space-x-2 transition-transform hover:scale-105 duration-300"
           >
-            <img
+            <Image
               src={isScrolled ? '/logo_b.png' : '/logo_w.png'}
               alt="Prolift Academy Logo"
+              width={120}
+              height={120}
               className="h-14 md:h-16 w-auto object-contain"
             />
-          </a>
+          </Link>
 
           {/* 🔸 Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
@@ -154,6 +159,7 @@ const Header = () => {
               className="lg:hidden fixed inset-0 z-60 bg-white/95 backdrop-blur-md border-t border-border"
             >
               <div className="max-w-7xl mx-auto px-6 pt-24 pb-10 relative">
+
                 {/* Close Button */}
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -187,12 +193,11 @@ const Header = () => {
 
                 {/* Call-to-Actions */}
                 <div className="flex flex-col gap-3">
-                  {/* Primary: Join Now */}
+
                   <Button className="w-full bg-primary hover:bg-secondary text-white font-semibold py-3 rounded-full text-base transition-all">
                     Join Now
                   </Button>
 
-                  {/* Secondary: Call Now */}
                   <a href="tel:+919876543210" className="w-full">
                     <Button
                       variant="outline"
