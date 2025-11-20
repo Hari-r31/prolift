@@ -37,9 +37,9 @@ const Header = () => {
 
   const navItems = [
     { name: 'Home', href: '/' },
-    { name: 'Schedule', href: '/schedule' },
-    { name: 'Coaches', href: '/coaches' },
-    { name: 'Contact', href: '/contact' },
+    // { name: 'Schedule', href: '/schedule' },
+    // { name: 'Coaches', href: '/coaches' },
+    // { name: 'Contact', href: '/contact' },
   ];
 
   const headerVariants: Variants = {
