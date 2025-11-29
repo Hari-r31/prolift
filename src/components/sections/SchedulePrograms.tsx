@@ -5,32 +5,28 @@ import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Calendar, Clock, Users, Target, Zap, TrendingUp } from 'lucide-react';
+import { Calendar, Clock, Users, Target, TrendingUp } from 'lucide-react';
 
 const SchedulePrograms = () => {
   const [selectedProgram, setSelectedProgram] = useState<string | null>(null);
 
-  const programsVariants = {
+  const container = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
-      transition: { 
-        duration: 0.8,
-        staggerChildren: 0.2,
-        ease: "easeOut" as const
-      }
-    }
+      transition: { duration: 0.8, staggerChildren: 0.2, ease: "easeOut" as const }
+    },
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.9 },
-    visible: { 
-      opacity: 1, 
+  const card = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: {
+      opacity: 1,
       y: 0,
       scale: 1,
       transition: { duration: 0.6, ease: "easeOut" as const }
     },
-    hover: { 
+    hover: {
       y: -10,
       scale: 1.02,
       transition: { duration: 0.3, ease: "easeOut" as const }
@@ -41,179 +37,197 @@ const SchedulePrograms = () => {
     {
       id: 'professional',
       name: 'Professional',
-      description: 'For full-time players across all ages who aspire to play at the highest level.',
-      timings: '5AM-7AM, 10AM-1PM, 4-7PM (Mon-Sat)',
-      frequency: '2-3 sessions/day, 6 days/week',
+      description: 'For full-time players committed to high-level competitive training.',
+      timings: '5AM–7AM, 10AM–1PM, 4–7PM',
+      frequency: '2–3 sessions/day, 6 days/week',
       icon: Target,
-      color: 'from-red-500 to-orange-500',
+      gradient: 'bg-linear-to-br from-primary to-secondary',
       intensity: 'High',
-      features: ['Advanced Techniques', 'Competition Prep', 'Physical Conditioning', 'Mental Training']
+      features: ['Advanced Techniques', 'Competition Prep', 'Strength Training', 'Mental Coaching']
     },
     {
       id: 'intermediate',
       name: 'Intermediate',
-      description: 'For local superstars looking to take their game to the next level.',
-      timings: '6AM-7AM, 7AM-8AM, 8AM-9AM (Mon-Sun), 4PM-5PM, 5PM-6PM, 6PM-7PM (Mon-Sun)',
+      description: 'Ideal for developing players aiming to elevate their game.',
+      timings: '6–9AM & 4–7PM (Daily)',
       frequency: '1 session/day, 5 days/week',
       icon: TrendingUp,
-      color: 'from-blue-500 to-purple-500',
+      gradient: 'bg-linear-to-br from-secondary to-third',
       intensity: 'Medium',
-      features: ['Skill Development', 'Match Practice', 'Strategy Training', 'Fitness Drills']
+      features: ['Strategy Training', 'Footwork', 'Fitness', 'Match Play']
     },
     {
       id: 'beginner',
       name: 'Beginner',
-      description: 'For players looking to embark on their badminton journey.',
-      timings: '6AM-7AM, 7AM-8AM, 8AM-9AM (Mon-Sun), 4PM-5PM, 5PM-6PM, 6PM-7PM (Mon-Sun)',
-      frequency: '1 session/day, 3-5 days/week',
+      description: 'For students starting their badminton journey.',
+      timings: '6–9AM & 4–7PM (Daily)',
+      frequency: '3–5 sessions/week',
       icon: Users,
-      color: 'from-green-500 to-teal-500',
+      gradient: 'bg-linear-to-br from-third to-primary',
       intensity: 'Low',
-      features: ['Basic Techniques', 'Footwork Fundamentals', 'Rules & Etiquette', 'Fun Games']
+      features: ['Basic Techniques', 'Footwork', 'Rules & Discipline', 'Fun Games']
     }
   ];
 
-  const getIntensityColor = (intensity: string) => {
-    switch (intensity) {
-      case 'Low': return 'bg-green-100 text-green-800';
-      case 'Medium': return 'bg-yellow-100 text-yellow-800';
-      case 'High': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
+  const intensityColor = {
+    Low: 'bg-primary/10 text-primary',
+    Medium: 'bg-secondary/10 text-secondary',
+    High: 'bg-third/10 text-third',
   };
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+
+        {/* HEADER */}
         <motion.div
-          variants={programsVariants}
+          variants={container}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.15 }}
           className="text-center mb-16"
         >
-          <motion.h2 
-            variants={cardVariants}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+          <motion.h2
+            variants={card}
+            className="text-4xl md:text-5xl font-bold text-foreground mb-4"
           >
-            Training Programs
+            Training <span className="text-gradient">Programs</span>
           </motion.h2>
-          <motion.p 
-            variants={cardVariants}
-            className="text-xl text-gray-600 max-w-3xl mx-auto"
+
+          <motion.p
+            variants={card}
+            className="text-lg text-muted-foreground max-w-3xl mx-auto"
           >
-            Choose the program that matches your skill level and goals
+            Select the right pathway based on your goals and skill level.
           </motion.p>
         </motion.div>
 
-        {/* Program Cards */}
+        {/* PROGRAM CARDS */}
         <motion.div
-          variants={programsVariants}
+          variants={container}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12"
+          viewport={{ once: true, amount: 0.15 }}
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16"
         >
-          {programs.map((program, index) => (
+          {programs.map(program => (
             <motion.div
               key={program.id}
-              variants={cardVariants}
+              variants={card}
               whileHover="hover"
-              onClick={() => setSelectedProgram(selectedProgram === program.id ? null : program.id)}
-              className="cursor-pointer"
+              onClick={() =>
+                setSelectedProgram(selectedProgram === program.id ? null : program.id)
+              }
+              className="cursor-pointer group"
             >
-              <Card className={`h-full border-0 shadow-lg hover:shadow-2xl transition-all duration-300 ${
-                selectedProgram === program.id ? 'ring-2 ring-green-500' : ''
-              }`}>
+              <Card
+                className={`h-full bg-card border-border border rounded-2xl shadow-lg 
+                transition-all duration-300 hover:shadow-2xl 
+                ${selectedProgram === program.id ? 'ring-2 ring-primary' : ''}`}
+              >
                 <CardContent className="p-6">
-                  {/* Header */}
-                  <div className="flex items-center justify-between mb-4">
-                    <motion.div
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
-                      className={`w-16 h-16 bg-linear-to-br ${program.color} rounded-2xl flex items-center justify-center`}
-                    >
-                      <program.icon className="h-8 w-8 text-white" />
-                    </motion.div>
-                    <Badge className={getIntensityColor(program.intensity)}>
+
+                  {/* ICON + INTENSITY */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div className={`w-16 h-16 rounded-2xl ${program.gradient} flex items-center justify-center`}>
+                      <program.icon className="h-8 w-8 text-primary-foreground" />
+                    </div>
+                    <Badge className={intensityColor[program.intensity]}>
                       {program.intensity} Intensity
                     </Badge>
                   </div>
 
-                  {/* Content */}
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  {/* TITLE */}
+                  <h3 className="text-2xl font-bold text-foreground mb-1">
                     {program.name}
                   </h3>
-                  <p className="text-gray-600 mb-4">
+
+                  <p className="text-muted-foreground text-sm mb-4">
                     {program.description}
                   </p>
 
-                  {/* Details */}
+                  {/* INFO */}
                   <div className="space-y-3 mb-4">
-                    <div className="flex items-center space-x-2">
-                      <Clock className="h-4 w-4 text-gray-500" />
-                      <span className="text-sm text-gray-700">
-                        <strong>Timings:</strong> {program.timings}
-                      </span>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Clock className="h-4 w-4" />
+                      <span><strong>Timings:</strong> {program.timings}</span>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Calendar className="h-4 w-4 text-gray-500" />
-                      <span className="text-sm text-gray-700">
-                        <strong>Frequency:</strong> {program.frequency}
-                      </span>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Calendar className="h-4 w-4" />
+                      <span><strong>Frequency:</strong> {program.frequency}</span>
                     </div>
                   </div>
 
-                  {/* Features */}
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-gray-900 mb-2">What You'll Learn:</h4>
+                  {/* FEATURES */}
+                  <div className="mt-4">
+                    <h4 className="font-semibold text-foreground text-sm mb-2">
+                      What You'll Learn
+                    </h4>
                     <div className="flex flex-wrap gap-2">
-                      {program.features.map((feature, idx) => (
-                        <Badge key={idx} variant="secondary" className="text-xs">
-                          {feature}
+                      {program.features.map((f, idx) => (
+                        <Badge
+                          key={idx}
+                          variant="secondary"
+                          className="text-xs bg-primary/10 text-primary"
+                        >
+                          {f}
                         </Badge>
                       ))}
                     </div>
                   </div>
 
                   {/* CTA Button */}
-                  <Button 
-                    className="w-full prolift-gradient text-white font-semibold hover:shadow-lg transition-all duration-300"
+                  <Button
                     size="lg"
+                    className="
+                      w-full mt-6
+                      bg-gradient-primary
+                      text-primary-foreground
+                      font-semibold rounded-full
+                      shadow-md hover:shadow-xl
+                      transition-all duration-300
+                    "
                   >
                     Book Trial Class
                   </Button>
+
                 </CardContent>
               </Card>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Branch Information */}
+        {/* ACADEMY BRANCHES */}
         <motion.div
-          variants={programsVariants}
+          variants={container}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="bg-linear-to-r from-cyan-50 to-blue-50 rounded-2xl p-8 border border-cyan-200"
+          viewport={{ once: true }}
+          className="
+            rounded-2xl p-10 border border-border 
+            bg-linear-to-r from-primary/5 via-background to-third/5
+            shadow-lg
+          "
         >
-          <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+          <h3 className="text-2xl font-bold text-foreground mb-6 text-center">
             Academy Locations
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="text-center">
-              <h4 className="font-bold text-lg text-gray-900 mb-2">Bellandur Branch</h4>
-              <p className="text-gray-600 text-sm mb-2">Main Academy</p>
-              <p className="text-gray-700">All Programs Available</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-center">
+            <div>
+              <h4 className="text-lg font-semibold text-foreground mb-1">Bellandur Branch</h4>
+              <p className="text-muted-foreground text-sm">Main Academy</p>
+              <p className="text-foreground">All Programs Available</p>
             </div>
-            <div className="text-center">
-              <h4 className="font-bold text-lg text-gray-900 mb-2">Kormangala Branch</h4>
-              <p className="text-gray-600 text-sm mb-2">Coming Soon</p>
-              <p className="text-gray-500">Limited Programs</p>
+
+            <div>
+              <h4 className="text-lg font-semibold text-foreground mb-1">Kormangala Branch</h4>
+              <p className="text-muted-foreground text-sm">Coming Soon</p>
+              <p className="text-muted-foreground">Limited Programs</p>
             </div>
           </div>
         </motion.div>
+
       </div>
     </section>
   );

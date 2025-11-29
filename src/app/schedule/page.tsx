@@ -5,8 +5,8 @@ import Footer from '@/components/layout/Footer';
 import ScheduleHeader from '@/components/sections/ScheduleHeader';
 import SchedulePrograms from '@/components/sections/SchedulePrograms';
 import ScheduleTimeline from '@/components/sections/ScheduleTimeline';
-import WeeklyGrid from '@/components/sections/WeeklyGrid';
 import ScheduleCTA from '@/components/sections/ScheduleCTA';
+import WeeklyOverview from '@/components/sections/weeklyOverview';
 
 export default function SchedulePage() {
   return (
@@ -16,7 +16,7 @@ export default function SchedulePage() {
         <ScheduleHeader />
         <SchedulePrograms />
         <ScheduleTimeline />
-        <WeeklyGrid />
+        <WeeklyOverview />
         <ScheduleCTA />
         <div>
           

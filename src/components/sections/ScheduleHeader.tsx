@@ -2,104 +2,121 @@
 
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Calendar, Clock, Users, Target } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import Button from '../Shared/Button';
 
 const ScheduleHeader = () => {
-    // Framer Motion scroll progress tracker
   const { scrollYProgress } = useScroll();
 
-  // Smooth the progress animation
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001,
   });
-  const headerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
+
+  const container = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
       opacity: 1,
-      transition: { 
-        duration: 0.8,
+      y: 0,
+      transition: {
+        duration: 0.9,
+        ease: 'easeOut' as const,
         staggerChildren: 0.2,
-        ease: "easeOut" as const
-      }
-    }
+      },
+    },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
+  const item = {
+    hidden: { opacity: 0, y: 25 },
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" as const }
-    }
+      transition: { duration: 0.6, ease: 'easeOut' as const },
+    },
   };
 
   return (
     <motion.section
       id="page-hero"
-      variants={headerVariants}
+      variants={container}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
-      className="py-20 bg-linear-to-br from-green-600 to-orange-500 text-white"
+      viewport={{ once: true, amount: 0.15 }}
+      className="
+        relative py-28
+        bg-linear-to-br from-primary/5 via-background to-secondary/5
+        border-b border-border
+        overflow-hidden
+      "
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.h2 
-          variants={itemVariants}
-          className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
+      {/* 🔵 Soft Glow Circles (Same Style as CoachesIntro) */}
+      <div className="absolute -top-20 -left-20 w-72 h-72 bg-primary/20 blur-3xl rounded-full opacity-40" />
+      <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-third/20 blur-3xl rounded-full opacity-40" />
+
+      <div className="relative max-w-7xl mx-auto px-5 text-center">
+
+        {/* Heading */}
+        <motion.h2
+          variants={item}
+          className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground mb-6"
         >
           Training Schedule Roadmap
         </motion.h2>
-        <motion.p 
-          variants={itemVariants}
-          className="text-xl max-w-3xl mx-auto mb-8 leading-relaxed opacity-90"
+
+        {/* Subheading */}
+        <motion.p
+          variants={item}
+          className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-10"
         >
-          Choose a batch that fits your lifestyle and start your journey to badminton excellence with our flexible training schedules.
+          Choose a batch that fits your lifestyle and begin your journey to badminton
+          excellence with structured, flexible training slots.
         </motion.p>
-        
-        <motion.div 
-          variants={itemVariants}
-          className="flex flex-wrap justify-center gap-6 mb-8"
+
+        {/* Stats */}
+        <motion.div
+          variants={item}
+          className="flex flex-wrap justify-center gap-6 mb-10 text-foreground/80"
         >
-          <div className="flex items-center space-x-2">
-            <Calendar className="h-5 w-5" />
-            <span>7 Days a Week</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Clock className="h-5 w-5" />
-            <span>5AM - 9PM</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Users className="h-5 w-5" />
-            <span>Small Group Sizes</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Target className="h-5 w-5" />
-            <span>Goal-Oriented</span>
-          </div>
+          <div className="flex items-center gap-2"><Calendar className="h-5 w-5" /> <span>7 Days a Week</span></div>
+          <div className="flex items-center gap-2"><Clock className="h-5 w-5" /> <span>5AM – 9PM</span></div>
+          <div className="flex items-center gap-2"><Users className="h-5 w-5" /> <span>Small Batches</span></div>
+          <div className="flex items-center gap-2"><Target className="h-5 w-5" /> <span>Goal-Oriented</span></div>
         </motion.div>
 
+        {/* CTA */}
         <motion.div
-          variants={itemVariants}
+          variants={item}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <Button 
+          <Button
             size="lg"
-            className="bg-white text-green-600 px-8 py-4 text-lg font-semibold hover:bg-gray-100 transition-all duration-300"
+            className="
+              bg-primary 
+              hover:bg-secondary 
+              text-primary-foreground
+              font-semibold 
+              px-8 py-4 
+              rounded-full 
+              shadow-lg 
+              transition-all duration-300
+            "
           >
             Book Your Slot
           </Button>
         </motion.div>
       </div>
-            {/* 🔵 Scroll Progress Bar (Morphs from bottom indicator) */}
+
+      {/* 🔥 Scroll Progress Bar Aligned with Global Theme */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[3px] origin-left z-100 bg-[linear-gradient(90deg,#fabb34_0%,#c11350_50%,#0197e2_100%)]"
+        className="
+          fixed top-0 left-0 right-0 
+          h-[3px] z-9999 origin-left
+          bg-gradient-primary
+        "
         style={{ scaleX }}
       />
     </motion.section>
-    
   );
 };
 

@@ -5,16 +5,16 @@ import { Button } from '@/components/ui/button';
 import { Calendar, ChevronUp } from 'lucide-react';
 
 const ScheduleCTA = () => {
-  const ctaVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { 
-      opacity: 1, 
+  const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" as const }
+      transition: { duration: 0.8, ease: "easeOut" as const}
     }
   };
 
-  const floatVariants = {
+  const float = {
     animate: {
       y: [-10, 10, -10],
       transition: {
@@ -27,92 +27,104 @@ const ScheduleCTA = () => {
 
   return (
     <motion.section
-      variants={ctaVariants}
+      variants={fadeUp}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
-      className="py-20 bg-linear-to-br from-green-600 to-orange-500 relative overflow-hidden"
+      viewport={{ once: true, amount: 0.15 }}
+      className="
+        relative py-20 
+        bg-gradient-primary
+        text-primary-foreground
+        overflow-hidden
+      "
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px)`
-        }}></div>
+      {/* Glow Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/30 blur-3xl opacity-40 rounded-full" />
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-third/30 blur-3xl opacity-40 rounded-full" />
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div className="relative z-10 max-w-4xl mx-auto px-5 text-center">
+        {/* Floating Icon */}
         <motion.div
-          variants={floatVariants}
+          variants={float}
           animate="animate"
-          className="inline-flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full mb-6"
+          className="
+            inline-flex items-center justify-center
+            w-20 h-20 rounded-full
+            bg-white/15 backdrop-blur-md
+            shadow-lg mb-6
+          "
         >
-          <Calendar className="h-10 w-10 text-white" />
+          <Calendar className="h-10 w-10 text-primary-foreground" />
         </motion.div>
 
-        <motion.h2 
-          variants={ctaVariants}
-          className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6"
+        {/* Title */}
+        <motion.h2
+          variants={fadeUp}
+          className="text-4xl md:text-5xl font-bold mb-6"
         >
           Ready to Start Your Journey?
         </motion.h2>
-        
-        <motion.p 
-          variants={ctaVariants}
-          className="text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed"
+
+        {/* Subtitle */}
+        <motion.p
+          variants={fadeUp}
+          className="text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto mb-10"
         >
-          Join our academy today and take the first step towards becoming a badminton champion. 
-          Book your trial session and experience the ProLift difference.
+          Join our academy and train under certified coaches with world-class
+          programs. Book a trial session today.
         </motion.p>
 
+        {/* CTAs */}
         <motion.div
-          variants={ctaVariants}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          variants={fadeUp}
+          className="flex flex-col sm:flex-row justify-center items-center gap-4"
         >
-          <Button 
+          <Button
             size="lg"
-            className="bg-white text-green-600 px-8 py-4 text-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl"
+            className="
+              bg-white text-primary font-semibold 
+              px-8 py-4
+              rounded-full shadow-xl 
+              hover:bg-primary/20 hover:text-primary 
+              transition-all duration-300
+            "
           >
             Book Your Slot
           </Button>
-          
-          <Button 
-            variant="outline" 
+
+          <Button
+            variant="outline"
             size="lg"
-            className="border-white text-white hover:bg-white hover:text-green-600 px-8 py-4 text-lg font-semibold transition-all duration-300"
+            className="
+              border-white/60 text-primary-foreground 
+              hover:bg-white hover:text-primary 
+              px-8 py-4 rounded-full
+              font-semibold transition-all duration-300
+            "
           >
             Download Schedule
           </Button>
         </motion.div>
 
-        <motion.div
-          variants={ctaVariants}
-          className="mt-12 flex justify-center"
-        >
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 max-w-md">
-            <h3 className="text-xl font-bold text-white mb-4">Quick Enquiry</h3>
-            <div className="flex space-x-2">
-              <input
-                type="tel"
-                placeholder="Enter your phone number"
-                className="flex-1 px-4 py-2 rounded-lg bg-white/20 backdrop-blur-sm text-white placeholder-white/70 border border-white/30 focus:outline-none focus:border-white"
-              />
-              <Button className="bg-white text-green-600 hover:bg-gray-100 font-semibold">
-                Send
-              </Button>
-            </div>
-          </div>
-        </motion.div>
       </div>
 
-      {/* Floating CTA Button for Mobile */}
+      {/* Floating CTA on Mobile */}
       <motion.div
-        variants={floatVariants}
+        variants={float}
         animate="animate"
-        className="fixed bottom-6 right-6 z-40 lg:hidden"
+        className="fixed bottom-6 right-6 lg:hidden z-50"
       >
-        <Button 
+        <Button
           size="lg"
-          className="prolift-gradient text-white px-6 py-3 rounded-full font-semibold shadow-2xl hover:shadow-3xl transition-all duration-300"
+          className="
+            bg-gradient-primary 
+            text-primary-foreground
+            px-6 py-3 rounded-full 
+            font-semibold shadow-2xl 
+            hover:shadow-3xl transition-all
+          "
         >
           Book Slot
           <ChevronUp className="ml-2 h-4 w-4" />
