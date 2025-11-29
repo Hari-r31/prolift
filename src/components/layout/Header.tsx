@@ -37,9 +37,9 @@ const Header = () => {
 
   const navItems = [
     { name: 'Home', href: '/' },
-    // { name: 'Schedule', href: '/schedule' },
-    // { name: 'Coaches', href: '/coaches' },
-    // { name: 'Contact', href: '/contact' },
+    { name: 'Schedule', href: '/schedule' },
+    { name: 'Coaches', href: '/coaches' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   const headerVariants: Variants = {
@@ -96,8 +96,8 @@ const Header = () => {
                 className={cn(
                   'font-medium transition-colors relative group',
                   isScrolled
-                    ? 'text-gray-700 hover:text-primary'
-                    : 'text-gray-700 hover:text-primary'
+                    ? 'text-gray-600 hover:text-primary'
+                    : 'text-gray-600 hover:text-primary'
                 )}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}

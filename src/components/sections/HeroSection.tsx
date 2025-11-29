@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import Button from '../Shared/Button';
 
 const HeroSection = () => {
   // Framer Motion scroll progress tracker
@@ -63,23 +63,25 @@ const HeroSection = () => {
 
 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
   <Button
-    size="lg"
-    className="group bg-[#00A8E8]/90 hover:bg-[#0094cf] text-white font-medium px-8 py-4 text-base rounded-full shadow-md hover:shadow-cyan-500/30 transition-all duration-300 flex items-center"
-  >
+              size="md"
+              icon={true}
+              href="/contact"
+              className="bg-primary hover:bg-secondary text-white font-semibold"
+            >
     Enroll Now
-    <ArrowRight
-      className="ml-2 h-5 w-5 text-white transition-all duration-300 group-hover:text-[#fabb34] group-hover:translate-x-1 group-hover:rotate-90"
-    />
-  </Button>
+
+            </Button>
 </div>
 
       </motion.div>
 
       {/* 🔵 Scroll Progress Bar (Morphs from bottom indicator) */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-[3px] origin-left z-100 bg-[linear-gradient(90deg,#fabb34_0%,#c11350_50%,#0197e2_100%)]"
-        style={{ scaleX }}
-      />
+<motion.div
+  className="fixed top-0 left-0 right-0 h-[3px] origin-left z-100 
+             bg-[linear-gradient(90deg,var(--third)_0%,var(--secondary)_50%,var(--primary)_100%)]"
+  style={{ scaleX }}
+/>
+
 
 
     </section>

@@ -1,94 +1,75 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
-/* ✅ No dark mode variants */
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-inter);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-}
-
-/* 🌈 ProLift Brand Palette — Light Only */
+/* === THEME VARIABLES === */
 :root {
   --radius: 0.625rem;
 
-  /* Brand colors */
-  --primary: #0197e2;   /* Cyan Blue */
-  --secondary: #c11350; /* Bold Crimson */
-  --third: #F9B234;     /* Vibrant Yellow */
+  /* Navy Palette */
+  --primary: #0197e2;
+  --secondary: #153b73;
+  --third: #4a6fa5;
 
-  /* Base colors */
+  /* Base Colors */
   --background: #ffffff;
-  --foreground: #0f172a;
-  --card: #ffffff;
-  --card-foreground: #0f172a;
-  --popover: #ffffff;
-  --popover-foreground: #0f172a;
+  --foreground: #0a1f44;
 
-  /* Semantic theme colors */
+  --card: #ffffff;
+  --card-foreground: #0a1f44;
+
+  --popover: #ffffff;
+  --popover-foreground: #0a1f44;
+
+  /* Semantic */
   --accent: var(--secondary);
   --accent-foreground: #ffffff;
   --primary-foreground: #ffffff;
   --secondary-foreground: #ffffff;
+
   --muted: #f1f5f9;
   --muted-foreground: #475569;
   --destructive: #dc2626;
   --border: #e2e8f0;
   --input: #e2e8f0;
   --ring: var(--primary);
-
-  /* Sidebar + Charts */
-  --chart-1: var(--primary);
-  --chart-2: var(--secondary);
-  --chart-3: var(--third);
-  --chart-4: #10b981;
-  --chart-5: #9333ea;
-
-  --sidebar: #f8fafc;
-  --sidebar-foreground: #0f172a;
-  --sidebar-primary: var(--primary);
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: var(--third);
-  --sidebar-accent-foreground: #000000;
-  --sidebar-border: #e2e8f0;
-  --sidebar-ring: var(--primary);
 }
 
-/* 🌐 Base styles */
+/* === TAILWIND V4 THEME MAPPING === */
+@theme inline {
+  /* Core color tokens */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-third: var(--third);
+  --color-third-foreground: #ffffff;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-accent: var(--third);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: #ffffff;
+
+  /* Radius scale */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+
+/* === BASE === */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -104,41 +85,36 @@
   }
 }
 
-/* ✨ Utility Layer — Brand Focused */
+/* === UTILITIES === */
+/* === UTILITIES === */
 @layer utilities {
-  /* 🔵 Gradients */
-  .brand-gradient {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  }
-
-  .brand-gradient-text {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* 🎯 Buttons */
   .btn-primary {
-    @apply bg-[var(--primary)] text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300;
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-2xl font-semibold shadow-md 
+           hover:shadow-lg hover:scale-105 transition-all;
   }
 
   .btn-secondary {
-    @apply bg-[var(--secondary)] text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300;
+    @apply bg-secondary text-secondary-foreground px-6 py-3 rounded-2xl font-semibold shadow-md 
+           hover:shadow-lg hover:scale-105 transition-all;
   }
 
   .btn-third {
-    @apply bg-[var(--third)] text-black px-8 py-4 rounded-2xl font-semibold text-lg shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300;
+    @apply bg-third text-third-foreground px-6 py-3 rounded-2xl font-semibold shadow-md 
+           hover:shadow-lg hover:scale-105 transition-all;
   }
 
-  /* 🧊 Glassmorphism */
-  .glassmorphism {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+
+  .navy-gradient {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
   }
 
-  /* ✨ Hover Lift */
+  .navy-gradient-text {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
   .hover-lift {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
@@ -147,39 +123,4 @@
     transform: translateY(-4px);
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
   }
-
-  /* 🌈 Gradient Text */
-  .text-gradient {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  /* 🪄 Animation Stagger */
-  .stagger-animation > * {
-    animation: fadeInUp 0.6s ease forwards;
-    opacity: 0;
-  }
-
-  .stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
-  .stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
-  .stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
-  .stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
-}
-
-/* 🎞️ Animations */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(25px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.animate-gradient-shift {
-  background-size: 200% 200%;
-  animation: gradient-shift 3s ease infinite;
 }
