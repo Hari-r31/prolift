@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+
+// UI Components
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,6 +16,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+
+// Icons
 import {
   Send,
   User,
@@ -21,7 +25,60 @@ import {
   Phone,
   MessageSquare,
   MapPin,
+  MessageCircle as MessageCircleIcon,
 } from 'lucide-react';
+
+/* -------------------------------
+   UNIFIED CTA BUTTON
+-------------------------------- */
+const CTAButton = ({ href, children, className = "" }) => (
+  <Button
+    asChild
+    className={`
+      w-full h-11 rounded-full font-semibold text-white
+      bg-linear-to-r from-primary to-secondary
+      shadow-md hover:shadow-lg
+      flex items-center justify-center gap-2
+      hover:scale-[1.02] active:scale-[0.97]
+      transition-all duration-300
+      ${className}
+    `}
+  >
+    <a
+      href={href}
+      target={href.startsWith('http') ? '_blank' : '_self'}
+      rel="noopener noreferrer"
+      className="flex items-center gap-2"
+    >
+      {children}
+    </a>
+  </Button>
+);
+
+export const CallButton = ({ className = "" }) => (
+  <CTAButton href="tel:+918904768822" className={className}>
+    <Phone className="h-5 w-5" />
+    Call Now
+  </CTAButton>
+);
+
+export const WhatsAppButton = ({ className = "" }) => (
+  <CTAButton href="https://wa.me/918904768822" className={className}>
+    <MessageCircleIcon className="h-5 w-5" />
+    WhatsApp
+  </CTAButton>
+);
+
+export const EmailButton = ({ className = "" }) => (
+  <CTAButton href="mailto:proliftbaddy2022@gmail.com" className={className}>
+    <Mail className="h-5 w-5" />
+    Send Email
+  </CTAButton>
+);
+
+/* -------------------------------
+   MAIN COMPONENT
+-------------------------------- */
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -34,143 +91,135 @@ const ContactForm = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
+  const infoItems = [
+    { component: <CallButton className="w-full" /> },
+    { component: <WhatsAppButton className="w-full" /> },
+    { component: <EmailButton className="w-full" /> },
+  ];
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleInputChange = (field, value) =>
+    setFormData((prev) => ({ ...prev, [field]: value }));
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate backend call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log('Form submitted:', formData);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      program: '',
+      message: '',
+    });
 
     setIsSubmitting(false);
-    setFormData({ name: '', email: '', phone: '', program: '', message: '' });
   };
 
-  // Animation Variants
-  const containerVariants = {
+  /* Animation Variants */
+  const container = {
     hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: 'easeOut' as const, staggerChildren: 0.15 },
+      transition: { duration: 0.8, staggerChildren: 0.2 },
     },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' as const },
-    },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
     <motion.section
-      variants={containerVariants}
+      variants={container}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      className="py-20 bg-gray-50"
+      viewport={{ once: true }}
+      className="py-20 bg-background"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* SECTION HEADER */}
-        <motion.div
-          variants={itemVariants}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+
+        {/* HEADER */}
+        <motion.div variants={itemVariants} className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Get in <span className="text-gradient">Touch</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Have questions about our programs? Want to schedule a visit?  
-            Send us a message and we'll get back to you soon!
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Have questions? Want to schedule a visit? Send us a message and we'll reply soon!
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
           {/* CONTACT FORM */}
           <motion.div variants={itemVariants}>
-            <Card className="border-0 shadow-xl bg-white">
+            <Card className="border border-border shadow-xl bg-card">
               <CardContent className="p-8">
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Name */}
+
+                  {/* NAME */}
                   <div>
-                    <Label htmlFor="name" className="text-gray-700 font-medium">
-                      Full Name *
-                    </Label>
+                    <Label>Full Name *</Label>
                     <div className="relative mt-2">
-                      <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                      <User className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
                       <Input
-                        id="name"
-                        type="text"
                         placeholder="Enter your full name"
                         value={formData.name}
                         onChange={(e) => handleInputChange('name', e.target.value)}
-                        className="pl-10 py-3 border-gray-300 focus:border-green-500 focus:ring-green-500"
+                        className="pl-10 py-3 border-border"
                         required
                       />
                     </div>
                   </div>
 
-                  {/* Email */}
+                  {/* EMAIL */}
                   <div>
-                    <Label htmlFor="email" className="text-gray-700 font-medium">
-                      Email Address *
-                    </Label>
+                    <Label>Email *</Label>
                     <div className="relative mt-2">
-                      <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                      <Mail className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
                       <Input
-                        id="email"
                         type="email"
                         placeholder="your.email@example.com"
                         value={formData.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
-                        className="pl-10 py-3 border-gray-300 focus:border-green-500 focus:ring-green-500"
+                        className="pl-10 py-3 border-border"
                         required
                       />
                     </div>
                   </div>
 
-                  {/* Phone */}
+                  {/* PHONE */}
                   <div>
-                    <Label htmlFor="phone" className="text-gray-700 font-medium">
-                      Phone Number *
-                    </Label>
+                    <Label>Phone *</Label>
                     <div className="relative mt-2">
-                      <Phone className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                      <Phone className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
                       <Input
-                        id="phone"
-                        type="tel"
                         placeholder="+91 98765 43210"
                         value={formData.phone}
                         onChange={(e) => handleInputChange('phone', e.target.value)}
-                        className="pl-10 py-3 border-gray-300 focus:border-green-500 focus:ring-green-500"
+                        className="pl-10 py-3 border-border"
                         required
                       />
                     </div>
                   </div>
 
-                  {/* Program */}
+                  {/* PROGRAM */}
                   <div>
-                    <Label htmlFor="program" className="text-gray-700 font-medium">
-                      Interested Program
-                    </Label>
+                    <Label>Interested Program</Label>
                     <Select
                       value={formData.program}
                       onValueChange={(value) => handleInputChange('program', value)}
                     >
-                      <SelectTrigger className="mt-2 py-3 border-gray-300 focus:border-green-500">
+                      <SelectTrigger className="mt-2 py-3 border-border">
                         <SelectValue placeholder="Select a program" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="little-champs">Little Champs (6–10 yrs)</SelectItem>
-                        <SelectItem value="junior-dev">Junior Development (11–15 yrs)</SelectItem>
-                        <SelectItem value="senior">Senior Training (16+ yrs)</SelectItem>
+                        <SelectItem value="junior-dev">Junior Development</SelectItem>
+                        <SelectItem value="senior">Senior Training</SelectItem>
                         <SelectItem value="elite">Elite Training</SelectItem>
                         <SelectItem value="adult">Adult Program</SelectItem>
                         <SelectItem value="private">Private Coaching</SelectItem>
@@ -178,37 +227,34 @@ const ContactForm = () => {
                     </Select>
                   </div>
 
-                  {/* Message */}
+                  {/* MESSAGE */}
                   <div>
-                    <Label htmlFor="message" className="text-gray-700 font-medium">
-                      Message
-                    </Label>
+                    <Label>Message</Label>
                     <div className="relative mt-2">
-                      <MessageSquare className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                      <MessageSquare className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
                       <Textarea
-                        id="message"
-                        placeholder="Tell us about your goals or any questions..."
+                        placeholder="Tell us about your goals..."
                         value={formData.message}
                         onChange={(e) => handleInputChange('message', e.target.value)}
-                        className="pl-10 py-3 min-h-[120px] border-gray-300 focus:border-green-500 focus:ring-green-500 resize-none"
+                        className="pl-10 py-3 min-h-[120px] border-border resize-none"
                       />
                     </div>
                   </div>
 
-                  {/* Submit */}
+                  {/* SUBMIT */}
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-primary hover:bg-green-700 text-white py-3 text-lg font-semibold transition-all duration-300 disabled:opacity-50"
+                    className="w-full bg-primary hover:bg-secondary text-primary-foreground py-3 text-lg font-semibold"
                   >
                     {isSubmitting ? (
-                      <div className="flex items-center justify-center">
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                      <div className="flex items-center gap-2">
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-current" />
                         Sending...
                       </div>
                     ) : (
-                      <div className="flex items-center justify-center">
-                        <Send className="mr-2 h-5 w-5" />
+                      <div className="flex items-center gap-2">
+                        <Send className="h-5 w-5" />
                         Send Message
                       </div>
                     )}
@@ -216,74 +262,71 @@ const ContactForm = () => {
                 </form>
               </CardContent>
             </Card>
+
+            {/* CTA BUTTONS */}
+            <motion.div
+              variants={container}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10"
+            >
+              {infoItems.map((item, idx) => (
+                <motion.div key={idx} variants={itemVariants}>
+                  {item.component}
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
 
-          {/* MAP + INFO SECTION */}
+          {/* MAP + INFO PANEL */}
           <motion.div variants={itemVariants} className="space-y-8">
-            {/* Embedded Google Map */}
-            <div className="rounded-2xl overflow-hidden shadow-xl h-[400px] relative">
+
+            {/* MAP */}
+            <div className="rounded-2xl overflow-hidden shadow-xl h-[400px]">
               <iframe
-                title="Prolift Badminton Academy Map"
                 src="https://www.google.com/maps?q=Prolift+Badminton+Academy,+Bellandur,+Bangalore&output=embed"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
+                className="w-full h-full border-0"
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-full"
               />
             </div>
 
-            {/* Academy Info */}
-            <Card className="border-0 shadow-xl bg-white">
+            {/* INFO PANEL */}
+            <Card className="border border-border shadow-xl bg-card">
               <CardContent className="p-6 space-y-5">
-                <h3 className="text-xl font-bold text-gray-900">
-                  Academy Information
-                </h3>
+                <h3 className="text-xl font-bold text-foreground">Academy Information</h3>
 
-                <div className="flex items-start space-x-3">
+                <div className="flex gap-3">
                   <MapPin className="h-5 w-5 text-primary mt-1" />
                   <div>
-                    <p className="font-medium text-gray-900">Address</p>
-                    <p className="text-gray-600 text-sm">
+                    <p className="font-medium">Address</p>
+                    <p className="text-muted-foreground text-sm">
                       Green Glen Layout, Bellandur<br />
-                      Landmark: Sobha Lakeview Club House<br />
+                      Sobha Lakeview Club House<br />
                       Bengaluru, Karnataka 560103
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-3">
+                <div className="flex gap-3">
                   <Phone className="h-5 w-5 text-primary mt-1" />
                   <div>
-                    <p className="font-medium text-gray-900">Phone</p>
-                    <p className="text-gray-600 text-sm">+91 89047 68822</p>
+                    <p className="font-medium">Phone</p>
+                    <p className="text-muted-foreground text-sm">+91 89047 68822</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-3">
+                <div className="flex gap-3">
                   <Mail className="h-5 w-5 text-primary mt-1" />
                   <div>
-                    <p className="font-medium text-gray-900">Email</p>
-                    <p className="text-gray-600 text-sm">
+                    <p className="font-medium">Email</p>
+                    <p className="text-muted-foreground text-sm">
                       proliftbaddy2022@gmail.com
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-3">
-                  <div className="mt-1 text-primary">🕐</div>
-                  <div>
-                    <p className="font-medium text-gray-900">Working Hours</p>
-                    <p className="text-gray-600 text-sm">
-                      Monday – Sunday: 5:00 AM – 9:00 PM
-                    </p>
-                  </div>
-                </div>
               </CardContent>
             </Card>
           </motion.div>
+
         </div>
       </div>
     </motion.section>
