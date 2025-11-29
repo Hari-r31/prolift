@@ -1,65 +1,98 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Award, Target, Users, Star } from 'lucide-react';
+import Button from '../Shared/Button';
 
 const CoachesIntro = () => {
-  const introVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
+  const container = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
       opacity: 1,
-      transition: { 
-        duration: 0.8,
-        staggerChildren: 0.2,
-        ease: "easeOut" as const
-      }
-    }
+      y: 0,
+      transition: {
+        duration: 0.9,
+        ease: 'easeOut' as const,
+        staggerChildren: 0.22,
+      },
+    },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
+  const item = {
+    hidden: { opacity: 0, y: 25 },
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" as const }
-    }
+      transition: { duration: 0.65, ease: 'easeOut' as const },
+    },
   };
 
   return (
     <motion.section
-      variants={introVariants}
+      variants={container}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
-      className="py-20 bg-linear-to-br from-green-50 to-orange-50"
+      viewport={{ once: true, amount: 0.2 }}
+      id="coach-hero"
+      className="
+  relative 
+  py-28
+  bg-linear-to-br from-primary/5 via-background to-secondary/5
+  border-b border-border
+  overflow-hidden
+"
+
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.h2 
-          variants={itemVariants}
-          className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
+
+      {/* Soft glow circles */}
+      <div className="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-primary/20 blur-3xl opacity-40" />
+      <div className="absolute -bottom-16 -right-16 w-72 h-72 rounded-full bg-third/20 blur-3xl opacity-40" />
+
+      <div className="relative max-w-7xl mx-auto px-5 text-center">
+
+        {/* Heading */}
+        <motion.h2
+          variants={item}
+          className="
+            text-4xl md:text-5xl lg:text-6xl
+            font-extrabold tracking-tight
+            text-foreground mt-10
+          "
         >
-          Meet Our Coaches
+          Meet Our Elite Coaches
         </motion.h2>
-        <motion.p 
-          variants={itemVariants}
-          className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed"
+
+        {/* Subheading */}
+        <motion.p
+          variants={item}
+          className="
+            text-lg md:text-xl
+            text-muted-foreground
+            max-w-3xl mx-auto mt-6
+            leading-relaxed
+          "
         >
-          Experienced mentors guiding every step of your journey with expertise, passion, and dedication to excellence.
+          World-class mentors shaping the next generation of champions with
+          discipline, precision, and unmatched training experience.
         </motion.p>
+
+        {/* CTA */}
         <motion.div
-          variants={itemVariants}
+          variants={item}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          className="mt-10"
         >
-          <Button 
-            size="lg"
-            className="prolift-gradient text-white px-8 py-4 text-lg font-semibold hover:shadow-2xl transition-all duration-300"
-          >
+          <Button
+              size="md"
+              icon={true}
+              href="/contact"
+              className="bg-primary hover:bg-secondary text-white font-semibold"
+            >
             Book a Trial with a Coach
-          </Button>
+
+            </Button>
         </motion.div>
+
       </div>
     </motion.section>
   );

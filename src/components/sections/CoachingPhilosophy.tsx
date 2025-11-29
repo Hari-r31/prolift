@@ -113,7 +113,14 @@ const CoachingPhilosophy = () => {
                   </p>
 
                   {/* Decorative Line */}
-                  <div className="mt-6 h-1 w-0 bg-linear-to-r from-green-500 to-orange-500 group-hover:w-full transition-all duration-300 mx-auto"></div>
+                 <div className="
+  mt-6 h-[3px] w-0 
+  bg-gradient-primary
+  rounded-full
+  group-hover:w-full 
+  transition-all duration-300 mx-auto
+"></div>
+
                 </CardContent>
               </Card>
             </motion.div>

@@ -17,7 +17,8 @@ const Header = () => {
     const hero =
       document.getElementById('home') ||
       document.getElementById('page-hero') ||
-      document.getElementById('contact-hero');
+      document.getElementById('contact-hero') ||
+      document.getElementById('coach-hero');
 
     if (!hero) return;
 

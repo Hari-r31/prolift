@@ -5,6 +5,7 @@ import Footer from '@/components/layout/Footer';
 import CoachesIntro from '@/components/sections/CoachesIntro';
 import CoachGrid from '@/components/sections/CoachGrid';
 import CoachingPhilosophy from '@/components/sections/CoachingPhilosophy';
+import Certifications from '@/components/sections/certifications';
 import Testimonials from '@/components/sections/Testimonials';
 
 export default function CoachesPage() {
@@ -15,6 +16,7 @@ export default function CoachesPage() {
         <CoachesIntro />
         <CoachGrid />
         <CoachingPhilosophy />
+        <Certifications />
         <Testimonials />
       </main>
       <Footer />
